@@ -10,6 +10,7 @@ require './excel_parser'
 #   Fee - 0.0000002
 #   Fee Coin - STRAT
 class BinanceTrades < ExcelParser
+  @@pairs = ['BTC', 'ETH']
   attr_accessor :trades
 
   def initialize(file_path)
@@ -21,5 +22,18 @@ class BinanceTrades < ExcelParser
       total = trade[5].to_f
       sum += total
     end
+  end
+
+  def get_trades_by_pair(pair)
+    trades_by_pair = Hash.new([])
+    @trades.each do |trade|
+      currPair = trade[1]
+      if trades_by_pair[currPair].size > 0
+        trades_by_pair[currPair].push(trade)
+      else
+        trades_by_pair[currPair] = [trade]
+      end
+    end
+    return trades_by_pair[pair]
   end
 end
