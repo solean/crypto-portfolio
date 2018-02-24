@@ -1,4 +1,4 @@
-require 'roo'
+require './excel_parser'
 
 # Columns:
 #   Date - 2017-12-30 20:11:45
@@ -9,41 +9,17 @@ require 'roo'
 #   Total - 0.00021
 #   Fee - 0.0000002
 #   Fee Coin - STRAT
-
-class ExcelParser
-
-  def initialize
-  end
-
-  def parse(file_path)
-    if file_path.end_with? '.xlsx'
-      spreadsheet = Roo::Spreadsheet.open(file_path)
-      file = spreadsheet.sheet(0)
-
-      # 0 is blank, 1 is the row of headers, 2 is the first row of data
-      i = 2
-      rows = []
-      while i < file.last_row
-        rows.push(file.row(i))
-        i += 1
-      end
-
-      return rows
-    end
-  end
-end
-
 class BinanceTrades < ExcelParser
   attr_accessor :trades
 
   def initialize(file_path)
     @trades = parse(file_path)
   end
+
+  def get_trade_volume()
+    return @trades.reduce(0) do |sum, trade|
+      total = trade[5].to_f
+      sum += total
+    end
+  end
 end
-
-# ex = ExcelParser.new
-# history = ex.parse('./TradeHistory.xlsx')
-# puts history[0]
-
-bnc = BinanceTrades.new('./TradeHistory.xlsx')
-puts bnc.trades[0]
