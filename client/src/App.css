@@ -1,0 +1,22 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 80px;
+}
+
+.App-header {
+  background-color: #5a2eff;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  margin-top: 2em;
+  font-size: 3em;
+  font-family: Helvetica Neue;
+  font-weight: 200;
+}
+

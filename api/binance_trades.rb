@@ -10,7 +10,7 @@ require './excel_parser'
 #   Fee - 0.0000002
 #   Fee Coin - STRAT
 class BinanceTrades < ExcelParser
-  @@pairs = ['BTC', 'ETH']
+  @@pairs = ['BTC', 'ETH', 'BNB']
   attr_accessor :trades
 
   def initialize(file_path)
@@ -37,3 +37,5 @@ class BinanceTrades < ExcelParser
     return trades_by_pair[pair]
   end
 end
+
+
