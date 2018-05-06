@@ -14,10 +14,15 @@ export default class Api {
   }
 
   getTrades(pair) {
-    return this._makeRequest(`/trades/${pair}`);
+    const endpoint = pair ? `/trades/pair/${pair}` : '/trades';
+    return this._makeRequest(endpoint);
   }
  
   getTotalTradeVolume() {
     return this._makeRequest('/trades/volume');
+  }
+
+  getPairs() {
+    return this._makeRequest('trades/pairs');
   }
 }

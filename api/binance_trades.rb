@@ -24,6 +24,10 @@ class BinanceTrades < ExcelParser
     end
   end
 
+  def get_all_trades()
+    return @trades
+  end
+
   def get_trades_by_pair(pair)
     trades_by_pair = Hash.new([])
     @trades.each do |trade|
@@ -36,6 +40,14 @@ class BinanceTrades < ExcelParser
     end
     return trades_by_pair[pair]
   end
-end
 
+  def get_all_pairs()
+    pairs = Hash.new([])
+    @trades.each do |trade|
+      currPair = trade[1]
+      pairs[currPair] = 1
+    end
+    return pairs.keys
+  end
+end
 
