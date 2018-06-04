@@ -1,8 +1,12 @@
 require 'sinatra'
-require './binance_trades.rb'
+require 'sinatra/activerecord'
+require './environments'
+# require './binance_trades.rb'
+# require './parse_to_db'
+require './models/trade'
 
 BINANCE_TRADES = './TradeHistory.xlsx'
-binance = BinanceTrades.new(BINANCE_TRADES)
+# binance = BinanceTrades.new(BINANCE_TRADES)
 
 set :public_folder, '../client/build'
 set :root, File.expand_path('../.')
@@ -12,24 +16,34 @@ get '/' do
   render :html, :index
 end
 
+get '/trades/:id' do
+  Trade.find_by_id(params[:id])
+end
+
 get '/trades/pair/:pair' do |pair|
   content_type :json
 
-  trades = binance.get_trades_by_pair(pair)
+  trades = Trade.where(:pair => pair)
   trades.to_json
 end
 
-get '/trades/volume' do
-  volume = binance.get_trade_volume()
+get '/volume' do
+  volume = Hash.new
+  trades = Trade.all
+  puts trades
+  trades.each do |trade|
+    baseCoin = trade.pair.chars.last(3).join
+    if volume[baseCoin]
+      volume[baseCoin] = volume[baseCoin] + trade.total
+    else
+      volume[baseCoin] = trade.total
+    end
+  end
+  volume.to_json
 end
 
 get '/trades' do
-  trades = binance.get_all_trades()
+  trades = Trade.all
   trades.to_json
-end
-
-get '/trades/pairs' do
-  pairs = binance.get_all_pairs()
-  pairs.to_json
 end
 
