@@ -2,14 +2,23 @@ import React, { Component } from 'react';
 import './App.css';
 import Api from './api.js';
 import { Select, Table } from 'antd';
+import moment from 'moment';
 
 const Option = Select.Option;
 const api = new Api();
 
 const TRADE_COLUMNS = [{
+  title: 'Pair',
+  dataIndex: 'pair',
+  key: 'pair'
+}, {
   title: 'Date',
   dataIndex: 'date',
   key: 'date'
+}, {
+  title: 'Exchange',
+  dataIndex: 'exchange',
+  key: 'exchange'
 }, {
   title: 'Buy/Sell',
   dataIndex: 'type',
@@ -46,7 +55,12 @@ export default class App extends Component {
 
   async componentDidMount() {
     const trades = await api.getTrades();
-    const pairs = await api.getPairs();
+    let pairs = trades.map(t => t.pair);
+    pairs = Array.from(new Set(pairs));
+
+    const volume = await api.getTotalTradeVolume();
+    console.log(volume);
+
     this.setState({
       pairs,
       trades
@@ -60,14 +74,20 @@ export default class App extends Component {
   }
 
   buildTradeRow(trade, i) {
+    // This will break if I start trading in DOGE pairs :)
+    const baseCoin = trade.pair.slice(-3);
+    const mainCoin = trade.pair.slice(0, -3);
+
     return {
       key: i,
-      date: trade[0],
-      type: trade[2],
-      price: trade[3],
-      amount: trade[4],
-      total: trade[5],
-      fee: trade[6]
+      pair: mainCoin + '/' + baseCoin,
+      date: moment(trade.date).format('LLL'),
+      exchange: trade.exchange,
+      type: trade.buy_or_sell,
+      price: trade.price + ' ' + baseCoin,
+      amount: trade.amount + ' ' + mainCoin,
+      total: trade.total + ' ' + baseCoin,
+      fee: trade.fee + ' ' + trade.fee_coin
     };
   }
 

@@ -19,10 +19,7 @@ export default class Api {
   }
  
   getTotalTradeVolume() {
-    return this._makeRequest('/trades/volume');
+    return this._makeRequest('/volume');
   }
 
-  getPairs() {
-    return this._makeRequest('trades/pairs');
-  }
 }
