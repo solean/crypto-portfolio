@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Select } from 'antd';
 import moment from 'moment';
 import Grid from '../Grid/Grid.js';
+import CalendarHeatMap from 'react-calendar-heatmap';
 import Api from '../../utils/api.js';
 import './TradesDataTable.css';
 
@@ -111,7 +112,7 @@ export default class TradesDataTable extends Component {
 
   buildVolumeInfo() {
     return (
-      <div>
+      <div className='volumeInfoContainer'>
         <h3>Trade Volume</h3>
         <div>
           {
@@ -120,8 +121,28 @@ export default class TradesDataTable extends Component {
             })
           }
         </div>
+        <br/>
+        <h3>Number of Trades</h3>
+        { this.state.trades.length }
       </div>
     );
+  }
+
+  getTradesPerDay() {
+    let dayMap = {};
+    this.state.trades.forEach(t => {
+      const dateStr = moment(t.date).format('YYYY-MM-DD');
+      if (dayMap[dateStr]) {
+        dayMap[dateStr]++;
+      } else {
+        dayMap[dateStr] = 1;
+      }
+    });
+
+    const arr = Object.keys(dayMap).map(day => {
+      return { date: day, count: dayMap[day] };
+    });
+    return arr;
   }
 
   render() {
@@ -137,6 +158,20 @@ export default class TradesDataTable extends Component {
         </div>
         <div className='tradesInfoContainer'>
           { this.buildVolumeInfo() }
+          <div className='heatmapContainer'>
+            <CalendarHeatMap
+              startDate={ new Date('2017-12-01') }
+              endDate={ new Date() }
+              values={ this.getTradesPerDay() }
+              classForValue={val => {
+                if (!val) {
+                  return 'color-empty';
+                }
+                return `color-scale-${val.count}`;
+              }}
+              onClick={ console.log }
+            />
+          </div>
         </div>
         <div className='tradesGridContainer'>
           <Grid

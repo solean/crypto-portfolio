@@ -17,5 +17,47 @@
   padding: 20px;
 }
 
+.volumeInfoContainer {
+  display: inline-block;
+  margin-right: 40px;
+}
+
 .tradesGridContainer {
+}
+
+.heatmapContainer {
+  display: inline-block;
+  width: 500px;
+}
+
+.react-calendar-heatmap text {
+  font-size: 8px;
+  fill: #aaa;
+}
+
+.react-calendar-heatmap .react-calendar-heatmap-small-text {
+  font-size: 5px;
+}
+
+/*
+.react-calendar-heatmap rect:hover {
+  stroke: #dbdbdb;
+  stroke-width: 1px;
+}
+*/
+
+.react-calendar-heatmap .color-empty {
+  fill: #eeeeee;
+}
+.react-calendar-heatmap .color-scale-1 {
+  fill: #d6e685;
+}
+.react-calendar-heatmap .color-scale-2 {
+  fill: #8cc665;
+}
+.react-calendar-heatmap .color-scale-3 {
+  fill: #44a340;
+}
+.react-calendar-heatmap .color-scale-4 {
+  fill: #1e6823;
 }
