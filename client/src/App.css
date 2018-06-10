@@ -1,25 +1,22 @@
 @import '~antd/dist/antd.css';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 80px;
 }
 
 .App-header {
-  background-color: #4947d0;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  height: 50px;
+  padding: 10px;
+  font-family: 'Open Sans', 'serif';
 }
 
 .App-title {
-  margin-top: 2em;
-  font-size: 3em;
-  font-family: Gugi;
-  font-weight: 200;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.App-title:hover {
+  text-decoration: underline;
 }
 
