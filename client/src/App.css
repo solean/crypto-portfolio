@@ -3,12 +3,14 @@
 
 
 .App {
+  font-family: 'Open Sans', 'serif';
+  height: 100%;
+  background-color: #e7f4ff;
 }
 
 .App-header {
   height: 50px;
   padding: 10px;
-  font-family: 'Open Sans', 'serif';
 }
 
 .App-title {
@@ -18,5 +20,10 @@
 
 .App-title:hover {
   text-decoration: underline;
+}
+
+.outerContainer {
+  margin-top: 20px;
+  height: calc(100% - 70px);
 }
 

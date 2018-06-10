@@ -18,8 +18,12 @@ export default class Api {
     return this._makeRequest(endpoint);
   }
  
-  getTotalTradeVolume() {
-    return this._makeRequest('/volume');
+  getVolume(pair) {
+    if (pair) {
+      return this._makeRequest(`/volume/${pair}`);
+    } else {
+      return this._makeRequest('/volume');
+    }
   }
 
 }

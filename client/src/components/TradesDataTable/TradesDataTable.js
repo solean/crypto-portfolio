@@ -48,24 +48,30 @@ export default class TradesDataTable extends Component {
 
     this.state = {
       pairs: [],
-      trades: []
+      trades: [],
+      volume: {}
     }
 
     this.buidPairOption = this.buildPairOption.bind(this);
     this.buidTradeRow = this.buildTradeRow.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handlePairChange = this.handlePairChange.bind(this);
+    this.buildVolumeInfo = this.buildVolumeInfo.bind(this);
   }
 
   async componentDidMount() {
-    const trades = await api.getTrades();
+    const [trades, volume] = await Promise.all([
+      api.getTrades(),
+      api.getVolume()
+    ]);
+
     let pairs = trades.map(t => t.pair);
     pairs = Array.from(new Set(pairs));
 
-    const volume = await api.getTotalTradeVolume();
 
     this.setState({
       pairs,
-      trades
+      trades,
+      volume
     });
   }
 
@@ -73,9 +79,16 @@ export default class TradesDataTable extends Component {
     return <Option value={ pair } key={ arguments[1] }>{ pair }</Option>;
   }
 
-  async handleChange(item) {
-    const trades = await api.getTrades(item);
-    this.setState({ trades });
+  async handlePairChange(pair) {
+    const [trades, volume] = await Promise.all([
+      api.getTrades(pair),
+      api.getVolume(pair)
+    ]);
+
+    this.setState({
+      trades,
+      volume
+    });
   }
 
   buildTradeRow(trade, i) {
@@ -96,16 +109,34 @@ export default class TradesDataTable extends Component {
     };
   }
 
-  render() {
+  buildVolumeInfo() {
     return (
       <div>
+        <h3>Trade Volume</h3>
+        <div>
+          {
+            Object.keys(this.state.volume).map((baseCoin, i) => {
+              return <div key={ i }>{ baseCoin }: { this.state.volume[baseCoin] }</div>
+            })
+          }
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div className='tradesDataTableContainer'>
         <div className='tradesFilterContainer'>
-          <Select onChange={ this.handleChange }
+          <Select onChange={ this.handlePairChange }
                   placeholder='Trading Pair'
                   allowClear={ true }
                   style={{ width: 200 }}>
             { this.state.pairs.map(this.buildPairOption)  }
           </Select>
+        </div>
+        <div className='tradesInfoContainer'>
+          { this.buildVolumeInfo() }
         </div>
         <div className='tradesGridContainer'>
           <Grid

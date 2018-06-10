@@ -47,6 +47,8 @@ def get_volume(pair=nil)
       volume[baseCoin] = trade.total
     end
   end
+
+  return volume
 end
 
 get '/trades' do
