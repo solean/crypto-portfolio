@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import TradesDataTable from './components/TradesDataTable/TradesDataTable.js';
 import './App.css';
+import 'react-select/dist/react-select.css';
 
 export default class App extends Component {
   getTitle() {

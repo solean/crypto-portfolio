@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Select } from 'antd';
+import Select from 'react-select';
 import moment from 'moment';
 import Grid from '../Grid/Grid.js';
 import CalendarHeatMap from 'react-calendar-heatmap';
@@ -7,39 +7,30 @@ import Api from '../../utils/api.js';
 import './TradesDataTable.css';
 
 const api = new Api();
-const Option = Select.Option;
 const TRADE_COLUMNS = [{
-  title: 'Pair',
-  dataIndex: 'pair',
-  key: 'pair'
+  Header: 'Pair',
+  accessor: 'pair',
 }, {
-  title: 'Date',
-  dataIndex: 'date',
-  key: 'date'
+  Header: 'Date',
+  accessor: 'date',
 }, {
-  title: 'Exchange',
-  dataIndex: 'exchange',
-  key: 'exchange'
+  Header: 'Exchange',
+  accessor: 'exchange',
 }, {
-  title: 'Buy/Sell',
-  dataIndex: 'type',
-  key: 'type'
+  Header: 'Buy/Sell',
+  accessor: 'type',
 }, {
-  title: 'Price',
-  dataIndex: 'price',
-  key: 'price'
+  Header: 'Price',
+  accessor: 'price',
 }, {
-  title: 'Amount',
-  dataIndex: 'amount',
-  key: 'amount'
+  Header: 'Amount',
+  accessor: 'amount',
 }, {
-  title: 'Total',
-  dataIndex: 'total',
-  key: 'total'
+  Header: 'Total',
+  accessor: 'total',
 }, {
-  title: 'Fee',
-  dataIndex: 'fee',
-  key: 'fee'
+  Header: 'Fee',
+  accessor: 'fee',
 }];
 
 
@@ -50,10 +41,10 @@ export default class TradesDataTable extends Component {
     this.state = {
       pairs: [],
       trades: [],
-      volume: {}
+      volume: {},
+      currentPair: null
     }
 
-    this.buidPairOption = this.buildPairOption.bind(this);
     this.buidTradeRow = this.buildTradeRow.bind(this);
     this.handlePairChange = this.handlePairChange.bind(this);
     this.buildVolumeInfo = this.buildVolumeInfo.bind(this);
@@ -76,19 +67,17 @@ export default class TradesDataTable extends Component {
     });
   }
 
-  buildPairOption(pair) {
-    return <Option value={ pair } key={ arguments[1] }>{ pair }</Option>;
-  }
-
   async handlePairChange(pair) {
+    let value = pair ? pair.value : undefined;
     const [trades, volume] = await Promise.all([
-      api.getTrades(pair),
-      api.getVolume(pair)
+      api.getTrades(value),
+      api.getVolume(value)
     ]);
 
     this.setState({
       trades,
-      volume
+      volume,
+      currentPair: pair
     });
   }
 
@@ -151,9 +140,10 @@ export default class TradesDataTable extends Component {
         <div className='tradesFilterContainer'>
           <Select onChange={ this.handlePairChange }
                   placeholder='Trading Pair'
-                  allowClear={ true }
-                  style={{ width: 200 }}>
-            { this.state.pairs.map(this.buildPairOption)  }
+                  value={ this.state.currentPair }
+                  options={ this.state.pairs.map(p => {
+                    return { value: p, label: p };
+                  }) }>
           </Select>
         </div>
         <div className='tradesInfoContainer'>

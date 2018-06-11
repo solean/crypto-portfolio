@@ -1,9 +1,9 @@
-@import '~antd/dist/antd.css';
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 
 .App {
   font-family: 'Open Sans', 'serif';
+  font-size: 14px;
   height: 100%;
   background-color: #e7f4ff;
 }

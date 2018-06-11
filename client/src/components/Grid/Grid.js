@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Table } from 'antd';
+import ReactTable from 'react-table';
+import 'react-table/react-table.css';
 
 export default class Grid extends Component {
   constructor(props) {
@@ -18,9 +19,13 @@ export default class Grid extends Component {
   render() {
     return (
       <div>
-        <Table
+        <ReactTable
           columns={ this.props.columns }
-          dataSource={ this.state.data.map(this.props.buildRow) }
+          data={ this.state.data.map(this.props.buildRow) }
+          showPageSizeOptions={ false }
+          showPageJump={ false }
+          nextText='+'
+          previousText='-'
         />
       </div>
     );
