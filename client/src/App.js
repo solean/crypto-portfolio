@@ -19,7 +19,7 @@ export default class App extends Component {
     return (
       <div className='App'>
         <header className='App-header'>
-          <h2 className='App-title'>{ this.getTitle() }</h2>
+          <span className='App-title'>{ this.getTitle() }</span>
         </header>
         <div className='outerContainer'>
           <Switch>

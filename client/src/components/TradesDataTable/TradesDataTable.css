@@ -30,6 +30,10 @@
   border-top: 1px solid #d9d9d9;
 }
 
+.tradesGridContainer .ReactTable {
+  border: none;
+}
+
 .heatmapContainer {
   display: inline-block;
   width: 500px;
