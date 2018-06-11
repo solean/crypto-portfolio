@@ -19,6 +19,7 @@ const TRADE_COLUMNS = [{
 }, {
   Header: 'Buy/Sell',
   accessor: 'type',
+  Cell: row => <span className={ row.value === 'BUY' ? 'green' : 'red' }>{ row.value }</span>
 }, {
   Header: 'Price',
   accessor: 'price',

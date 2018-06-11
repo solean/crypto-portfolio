@@ -2,7 +2,7 @@ require 'date'
 require 'roo'
 require './models/trade'
 
-class Parser
+class BinanceTradeParser
   def parse_excel(path)
     if path.end_with? '.xlsx'
       spreadsheet = Roo::Spreadsheet.open(path)

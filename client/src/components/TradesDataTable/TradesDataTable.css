@@ -1,4 +1,12 @@
 
+.green {
+  color: #2bca6b;
+}
+
+.red {
+  color: #ff3a3a;
+}
+
 .tradesDataTableContainer {
   background-color: #fff;
   margin-left: 40px;
@@ -59,14 +67,14 @@
   fill: #eeeeee;
 }
 .react-calendar-heatmap .color-scale-1 {
-  fill: #d6e685;
+  fill: #bedaf7;
 }
 .react-calendar-heatmap .color-scale-2 {
-  fill: #8cc665;
+  fill: #7ab3ef;
 }
 .react-calendar-heatmap .color-scale-3 {
-  fill: #44a340;
+  fill: #368ce7;
 }
 .react-calendar-heatmap .color-scale-4 {
-  fill: #1e6823;
+  fill: #1666ba;
 }

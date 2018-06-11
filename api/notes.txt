@@ -1,0 +1,6 @@
+
+db setup
+  - to setup migration files:
+    - rake db:create_migration NAME=create_trades
+  - to run the migration:
+    - rake db:migrate
