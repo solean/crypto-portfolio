@@ -55,3 +55,28 @@ get '/trades' do
   trades = Trade.all
   trades.to_json
 end
+
+def insert_trades(rows)
+  rows.each do |row|
+    tradeObj = {
+      :date => Date.parse(row[0]),
+      :pair => row[1],
+      :exchange => 'BINANCE',
+      :buy_or_sell => row[2],
+      :price => row[3].to_f,
+      :amount => row[4].to_f,
+      :total => row[5].to_f,
+      :fee => row[6].to_f,
+      :fee_coin => row[7]
+    }
+
+    trade = Trade.new(tradeObj)
+
+    if trade.save
+      puts trade
+    else
+      raise 'Error: something went wrong while attempting to insert a Trade row.'
+    end
+  end
+end
+

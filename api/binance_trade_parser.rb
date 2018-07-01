@@ -1,13 +1,11 @@
+require 'date'
 require 'roo'
 
-class ExcelParser
+class BinanceTradeParser
 
-  def initialize
-  end
-
-  def parse(file_path)
-    if file_path.end_with? '.xlsx'
-      spreadsheet = Roo::Spreadsheet.open(file_path)
+  def parse_excel(path)
+    if path.end_with? '.xlsx'
+      spreadsheet = Roo::Spreadsheet.open(path)
       file = spreadsheet.sheet(0)
 
       # 0 is blank, 1 is the row of headers, 2 is the first row of data
@@ -21,4 +19,5 @@ class ExcelParser
       return rows
     end
   end
+
 end
