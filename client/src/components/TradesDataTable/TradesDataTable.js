@@ -8,6 +8,17 @@ import './TradesDataTable.css';
 
 const api = new Api();
 const TRADE_COLUMNS = [{
+  Header: '',
+  accessor: 'pair',
+  Cell: row => {
+    const mainCoin = row.value.slice(0, -4).toLowerCase();
+    return (
+      <div className='iconColumn'>
+        <img src={ require(`../../../node_modules/cryptocurrency-icons/dist/svg/color/${mainCoin}.svg`) } />
+      </div>
+    );
+  }
+},{
   Header: 'Pair',
   accessor: 'pair',
 }, {

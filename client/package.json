@@ -5,6 +5,7 @@
   "proxy": "http://localhost:4567",
   "dependencies": {
     "axios": "^0.18.0",
+    "cryptocurrency-icons": "^0.1.1",
     "moment": "^2.22.2",
     "react": "^16.2.0",
     "react-calendar-heatmap": "^1.6.3",

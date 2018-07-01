@@ -42,6 +42,10 @@
   border: none;
 }
 
+.iconColumn {
+  text-align: center;
+}
+
 .heatmapContainer {
   display: inline-block;
   width: 500px;
