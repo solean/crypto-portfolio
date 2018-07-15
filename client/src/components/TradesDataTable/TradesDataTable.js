@@ -146,6 +146,17 @@ export default class TradesDataTable extends Component {
     return arr;
   }
 
+  getPairOptions() {
+    let options = this.state.pairs.map(p => {
+      return { value: p, label: p };
+    });
+    return options.sort((a, b) => {
+      if (a.label < b.label) return -1;
+      if (a.label > b.label) return 1;
+      return 0;
+    });
+  }
+
   render() {
     return (
       <div className='tradesDataTableContainer'>
@@ -153,9 +164,7 @@ export default class TradesDataTable extends Component {
           <Select onChange={ this.handlePairChange }
                   placeholder='Trading Pair'
                   value={ this.state.currentPair }
-                  options={ this.state.pairs.map(p => {
-                    return { value: p, label: p };
-                  }) }>
+                  options={ this.getPairOptions() }>
           </Select>
         </div>
         <div className='tradesInfoContainer'>
