@@ -9,6 +9,7 @@ gem 'roo', '~> 2.7.0'
 gem 'sinatra-activerecord'
 gem 'sinatra-flash'
 gem 'sinatra-redirect-with-flash'
+gem 'faraday'
 
 group :development do
   gem 'pg'

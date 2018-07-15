@@ -3,7 +3,7 @@ require 'roo'
 
 class BinanceTradeParser
 
-  def parse_excel(path)
+  def parse(path)
     if path.end_with? '.xlsx'
       spreadsheet = Roo::Spreadsheet.open(path)
       file = spreadsheet.sheet(0)
@@ -17,6 +17,8 @@ class BinanceTradeParser
       end
 
       return rows
+    else
+      raise 'Invalid path. A Binance trade history file should be an .xlsx spreadsheet.'
     end
   end
 
