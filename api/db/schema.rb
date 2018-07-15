@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_04_005429) do
+ActiveRecord::Schema.define(version: 2018_07_15_034138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "deposits", force: :cascade do |t|
+    t.boolean "completed"
+    t.string "currency"
+    t.float "amount"
+    t.datetime "date"
+    t.string "address"
+    t.string "txid"
+  end
 
   create_table "trades", force: :cascade do |t|
     t.datetime "date"
@@ -25,6 +34,15 @@ ActiveRecord::Schema.define(version: 2018_06_04_005429) do
     t.float "total"
     t.float "fee"
     t.string "fee_coin"
+  end
+
+  create_table "withdrawals", force: :cascade do |t|
+    t.boolean "completed"
+    t.string "currency"
+    t.float "amount"
+    t.datetime "date"
+    t.string "address"
+    t.string "txid"
   end
 
 end

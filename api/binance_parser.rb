@@ -1,9 +1,9 @@
 require 'date'
 require 'roo'
 
-class BinanceTradeParser
+class BinanceParser
 
-  def parse(path)
+  def parse_trades(path)
     if path.end_with? '.xlsx'
       spreadsheet = Roo::Spreadsheet.open(path)
       file = spreadsheet.sheet(0)
@@ -19,6 +19,24 @@ class BinanceTradeParser
       return rows
     else
       raise 'Invalid path. A Binance trade history file should be an .xlsx spreadsheet.'
+    end
+  end
+
+  def parse_deposits(path)
+    if path.end_with? '.csv'
+      csv = Roo::CSV.new(path)
+      return csv.parse
+    else
+      raise 'Invalid path. Parser is expecting a .csv file.'
+    end
+  end
+
+  def parse_withdrawals(path)
+    if path.end_with? '.csv'
+      csv = Roo::CSV.new(path)
+      return csv.parse
+    else
+      raise 'Invalid path. Parser is expecting a .csv file.'
     end
   end
 

@@ -1,7 +1,10 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require './environments'
+require './models/deposit'
 require './models/trade'
+require './models/withdrawal'
+require './binance_parser'
 
 
 set :public_folder, '../client/build'
@@ -55,6 +58,34 @@ get '/trades' do
   trades = Trade.all
   trades.to_json
 end
+
+get '/deposits' do
+  deposits = Deposit.all
+  deposits.to_json
+end
+
+get '/withdrawals' do
+  withdrawals = Withdrawal.all
+  withdrawals.to_json
+end
+
+get '/import/trades/binance' do
+  binance_parser = BinanceParser.new
+  trade_folder = 'export_files/binance/trades'
+  inserted_trades = []
+
+  Dir.entries(trade_folder).each do |e|
+    if e.include? '.xlsx'
+      trades = binance_parser.parse_trades(trade_folder + '/' + e)
+      insert_trades(trades)
+      inserted_trades.concat(trades)
+    end
+  end
+
+  results = { :trades => inserted_trades }
+  return results.to_json
+end
+
 
 def insert_trades(rows)
   rows.each do |row|
