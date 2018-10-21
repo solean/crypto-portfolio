@@ -5,13 +5,14 @@
   font-family: 'Open Sans', 'serif';
   font-size: 14px;
   height: 100%;
-  background-color: #e7f4ff;
+  background-color: #002b36;
+  color: #93a1a1;
 }
 
 .App-header {
-  height: 50px;
   padding: 10px;
   margin-left: 30px;
+  color: #2aa198;
 }
 
 .App-title {
@@ -25,7 +26,11 @@
 }
 
 .outerContainer {
-  margin-top: 20px;
+  margin-top: 10px;
   height: calc(100% - 70px);
+}
+
+.hidden {
+  display: none;
 }
 

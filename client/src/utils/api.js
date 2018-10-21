@@ -1,5 +1,4 @@
-import axios from 'axios'
-
+import axios from 'axios';
 export default class Api {
   _makeRequest(url, params={}, { method='GET', ...options }={}) {
     const reqOptions = {
@@ -24,6 +23,10 @@ export default class Api {
     } else {
       return this._makeRequest('/volume');
     }
+  }
+
+  syncTrades() {
+    return this._makeRequest('import/trades/binance')
   }
 
 }

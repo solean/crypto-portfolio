@@ -115,7 +115,7 @@ export default class TradesDataTable extends Component {
     return (
       <div className='volumeInfoContainer'>
         <h3>Trade Volume</h3>
-        <div>
+        <div style={{ height: '38px' }}>
           {
             Object.keys(this.state.volume).map((baseCoin, i) => {
               return <div key={ i }>{ baseCoin }: { this.state.volume[baseCoin] }</div>
@@ -157,6 +157,11 @@ export default class TradesDataTable extends Component {
     });
   }
 
+  async onSyncTradesClick() {
+    const res = await api.syncTrades();
+    console.log(res);
+  }
+
   render() {
     return (
       <div className='tradesDataTableContainer'>
@@ -166,6 +171,7 @@ export default class TradesDataTable extends Component {
                   value={ this.state.currentPair }
                   options={ this.getPairOptions() }>
           </Select>
+          <button onClick={ this.onSyncTradesClick } className='hidden'>Sync Trades</button>
         </div>
         <div className='tradesInfoContainer'>
           { this.buildVolumeInfo() }
@@ -174,6 +180,7 @@ export default class TradesDataTable extends Component {
               startDate={ new Date('2017-12-01') }
               endDate={ new Date() }
               values={ this.getTradesPerDay() }
+              showWeekdayLabels={ true }
               classForValue={val => {
                 if (!val) {
                   return 'color-empty';

@@ -1,28 +1,39 @@
 
 .green {
-  color: #2bca6b;
+  color: #859900;
 }
 
 .red {
-  color: #ff3a3a;
+  color: #dc322f;
 }
 
 .tradesDataTableContainer {
-  background-color: #fff;
+  background-color: #002b36;
   margin-left: 40px;
   margin-right: 40px;
-  border: 1px solid #d9d9d9;
+  margin-bottom: 40px;
+  border: 1px solid #2aa198;
   border-radius: 6px;
-  box-shadow: 2px 2px 10px 0 #d9d9d9;
+  box-shadow: 2px 2px 10px 0 #2aa198;
 }
 
 .tradesFilterContainer {
   padding: 20px;
-  border-bottom: 1px solid #d9d9d9;
+  border-bottom: 1px solid #2aa198;
 }
 
 .tradesFilterContainer .Select {
   width: 200px;
+}
+.tradesFilterContainer .Select-control {
+  background-color: #002b36;
+  border-color: #268bd2;
+}
+.tradesFilterContainer .Select-placeholder {
+  color: #268bd2;
+}
+.tradesFilterContainer .Select-menu-outer {
+  background-color: #002b36;
 }
 
 .tradesInfoContainer {
@@ -32,23 +43,53 @@
 .volumeInfoContainer {
   display: inline-block;
   margin-right: 40px;
+  color: #d33682;
+}
+
+.volumeInfoContainer h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  text-decoration: underline;
 }
 
 .tradesGridContainer {
-  border-top: 1px solid #d9d9d9;
+  border-top: 1px solid #2aa198;
 }
 
 .tradesGridContainer .ReactTable {
   border: none;
+  color: #93a1a1;
+}
+
+.tradesGridContainer .ReactTable .rt-th {
+  color: #b58900;
+}
+
+.tradesGridContainer .ReactTable .rt-thead,
+.tradesGridContainer .ReactTable .rt-tr-group {
+  border-bottom: 1px solid #2aa19838;
+}
+
+.tradesGridContainer .ReactTable .-btn,
+.tradesGridContainer .ReactTable .-pageInfo {
+  color: #2aa198;
 }
 
 .iconColumn {
   text-align: center;
 }
 
+.iconColumn img {
+  height: 16px;
+}
+
 .heatmapContainer {
-  display: inline-block;
-  width: 500px;
+  float: right;
+  width: fit-content;
+}
+
+.react-calendar-heatmap {
+  height: 145px;
 }
 
 .react-calendar-heatmap text {
@@ -68,17 +109,23 @@
 */
 
 .react-calendar-heatmap .color-empty {
-  fill: #eeeeee;
+  fill: #073642;
 }
 .react-calendar-heatmap .color-scale-1 {
-  fill: #bedaf7;
+  fill: #005065;
 }
 .react-calendar-heatmap .color-scale-2 {
-  fill: #7ab3ef;
+  fill: #0097bd;
 }
 .react-calendar-heatmap .color-scale-3 {
-  fill: #368ce7;
+  fill: #00ccff;
 }
 .react-calendar-heatmap .color-scale-4 {
-  fill: #1666ba;
+  fill: #268bd2;
+}
+.react-calendar-heatmap .color-scale-5 {
+  fill: #2ea9ff;
+}
+.react-calendar-heatmap-week rect {
+  fill: #d1ecff;
 }
